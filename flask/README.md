@@ -26,3 +26,13 @@ CREATE DATABASE flaskapi;
 USE flaskapi;
 CREATE TABLE users(user_id INT PRIMARY KEY AUTO_INCREMENT, user_name VARCHAR(255), user_email VARCHAR(255), user_password VARCHAR(255));
 ```
+
+## testing the api
+
+```powershell
+minikube service flask-service
+curl -H "Content-Type: application/json" -d '{"name": "ethan", "email": "ethan@domain.com", "pwd": "1234"}' <flask-service_URL>/create
+```
+http://127.0.0.1:61922/
+
+curl -H "Content-Type: application/json" -d '{"name": "ethan", "email": "ethan@domain.com", "pwd": "1234"}' http://127.0.0.1:61922/create

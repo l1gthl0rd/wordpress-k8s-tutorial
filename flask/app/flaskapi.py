@@ -18,7 +18,22 @@ mysql.init_app(app)
 @app.route("/")
 def index():
     """Function to test the functionality of the API"""
-    return "fuck"
+    return "hello world"
+
+@app.route("/users")
+def get_users():
+    """gets all users from the database"""
+    try:
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute("select * from users")
+        conn.commit()
+        cursor.close()
+        conn.close()
+        result = cursor.fetchall()
+        return jsonify(result)
+    except Exception as exception:
+        return jsonify(str(exception))
 
 
 @app.route("/create", methods=["POST"])
