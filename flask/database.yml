@@ -17,11 +17,16 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: mysql:8
-        imagePullPolicy: Never
+        image: mysql:5.6
+        resources:
+          limits:
+            cpu: "0.25"
+            memory: 1G
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: mine
+        - name: MYSQL_ROOT_HOST
+          value: '%'
         ports:
         - containerPort: 3306
           name: db-container
@@ -32,8 +37,6 @@ spec:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
             claimName: mysql-pv-claim
-
-
 ---
 apiVersion: v1
 kind: Service
